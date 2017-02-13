@@ -1,0 +1,24 @@
+nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    links:
+      - "php"
+    volumes:
+      - /home/baizhe/data:/data
+
+php:
+    build: ./php
+    links:
+      - "mysql"
+    volumes:
+    - /home/baizhe/data:/data
+
+mysql:
+  build: ./mysql
+  ports:
+    - "3306:3306"
+  volumes:
+    - /home/baizhe/data/mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: 123456
